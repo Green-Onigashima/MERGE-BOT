@@ -17,27 +17,6 @@
 	"env": {
 		"CONFIG_FILE_URL": {
 			"description": "Make Config on gist and paste raw link", "required": false
-		},
-		"BOT_TOKEN": {
-			"description": "Get from @Botfather", "required": false
-		},
-		"BOT_USERNAME": {
-			"description": "Username of the bot", "required": false
-		},
-		"DATABASE_URL": {
-			"description": "Create a mongo db", "required": false	
-		},
-		"USER_STRING_SESSION": {
-			"description": "Generate pyrogram string session", "required": false
-		},
-		"PAID_PROMOTIOM": {
-			"description": "Username of telegram chat", "required": false
-		},
-		"SHORTENER_API": {
-			"description": "API of shortener website", "required": false
-		},
-		"SHORTENER_SITE": {
-			"description": "Paste the url of shortener website", "required": false
 		}
 	},
 	"formation": {
