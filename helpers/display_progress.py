@@ -1,6 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# (c) Shrimadhav U K | gautamajay52
+# Telegram - @StupidBoi69
 
 import logging
 import math
@@ -50,7 +48,7 @@ class Progress:
             [
                 [
                     InlineKeyboardButton(
-                        "⛔ Cancel ⛔",
+                        "Cancel",
                         callback_data=(
                             f"gUPcancel/{chat_id}/{mes_id}/{from_user}"
                         ).encode("UTF-8"),
@@ -61,7 +59,7 @@ class Progress:
         if self.is_cancelled:
             LOGGER.info("stopping ")
             await self._mess.edit(
-                f"⛔ **Cancelled** ⛔ \n\n `{ud_type}` ({humanbytes(total)})"
+                f"<b>Cancelled\n\n {ud_type} ({humanbytes(total)})</b>"
             )
             await self._client.stop_transmission()
 
@@ -76,7 +74,7 @@ class Progress:
             elapsed_time = TimeFormatter(milliseconds=elapsed_time)
             estimated_total_time = TimeFormatter(milliseconds=estimated_total_time)
 
-            progress = "\n<b>[{0}{1}] </b>\n".format(
+            progress = "\n<b>{0}{1} {2}%</b>\n".format(
                 "".join(
                     [FINISHED_PROGRESS_STR for i in range(math.floor(percentage / 5))]
                 ),
@@ -91,7 +89,7 @@ class Progress:
             # cpu = "{psutil.cpu_percent()}%"
             tmp = (
                 progress
-                + "**\n╭━━『𝖯𝗋𝗈𝗀𝗋𝖾𝗌𝗌 𝖡𝖺𝗋』━━➣**\n**┣⪼ 🗃️ 𝖲𝗂𝗓𝖾: **{1}\n**┣⪼ ⏳️ 𝖣𝗈𝗇𝖾 : **{0}\n**┣⪼ 🚀 𝖲𝗉𝖾𝖾𝖽: **{2}/s\n**┣⪼ ⏰️ 𝖤𝖳𝖠: **{3} {4}**╰━━━━━━━━━━━━━━━➣**".format(
+                + "\n<b>-Progress   : {0}\n-Total Size  : {1}\n-Speed        : {2}/s\n-Estimated : {3}\n{4}</b>".format(
                     humanbytes(current),
                     humanbytes(total),
                     humanbytes(speed),
