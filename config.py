@@ -18,7 +18,7 @@ class Config(object):
     TIMEOUT = os.environ.get("TIMEOUT")
     SHORTENER_API = os.environ.get("SHORTENER_API")
     SHORTENER_SITE =  os.environ.get("SHORTENER_SIE")
-    PAID_PROMOTIOM =  os.environ.get("PAID_PROMOTION")
+    PAID_PROMOTION =  os.environ.get("PAID_PROMOTION")
     
     MODES = ["video-video", "video-audio", "video-subtitle", "extract-streams"]
     
