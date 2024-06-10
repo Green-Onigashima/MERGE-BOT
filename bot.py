@@ -347,7 +347,7 @@ async def files_handler(c: Client, m: Message):
         result = collection.find_one({"user_id": uid})
         if result is None:
             ad_code = str_to_b64(f"{uid}:{str(get_current_time() + int(Config.TIMEOUT))}")  # Use Config.TIMEOUT
-            ad_url = shorten_url(f"https://telegram.me/{Config.BOT_USERNAME}?start={ad_code}")  # Use Config.BOT_USERNAME
+            ad_url = shorten_url(f"https://t.me/{Config.BOT_USERNAME}?start={ad_code}")  # Use Config.BOT_USERNAME
             await c.send_message(
                 m.chat.id,
                 f"""<b>ℹ️ Hi {m.from_user.mention},
@@ -363,7 +363,7 @@ Your verification is expired, click on below button and complete the verificatio
             return
         elif int(result["time_out"]) < get_current_time():
             ad_code = str_to_b64(f"{uid}:{str(get_current_time() + int(Config.TIMEOUT))}")  # Use Config.TIMEOUT
-            ad_url = shorten_url(f"https://telegram.me/{Config.BOT_USERNAME}?start={ad_code}")  # Use Config.BOT_USERNAME
+            ad_url = shorten_url(f"https://t.me/{Config.BOT_USERNAME}?start={ad_code}")  # Use Config.BOT_USERNAME
             await c.send_message(
                 m.chat.id,
                 f"""<b>ℹ️ Hi {m.from_user.mention},
@@ -378,8 +378,8 @@ Your verification is expired, click on below button and complete the verificatio
             )
             return
         elif int(result["time_out"]) < get_current_time():
-            ad_code = str_to_b64(f"{uid}:{str(get_current_time() + TIMEOUT)}") # timeout
-            ad_url = shorten_url(f"https://telegram.me/{bot_username}?start={ad_code}")
+            ad_code = str_to_b64(f"{uid}:{str(get_current_time() + int(Config.TIMEOUT)}") # timeout
+            ad_url = shorten_url(f"https://t.me/{bot_username}?start={ad_code}")
             await c.send_message(
                 m.chat.id,
                 f"""<b>ℹ️ Hi {m.from_user.mention},
