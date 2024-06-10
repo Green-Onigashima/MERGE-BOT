@@ -55,21 +55,19 @@ from helpers.utils import UserSettings, get_readable_file_size, get_readable_tim
 botStartTime = time.time()
 parent_id = Config.GDRIVE_FOLDER_ID
 
-#
 paid_promotion = Config.PAID_PROMOTION
 shortener_site = Config.SHORTENER_SITE
 shortener_api = Config.SHORTENER_API
 bot_username = Config.BOT_USERNAME
-#
 
-#####
+
 jr = MongoClient(Config.DATABASE_URL)
 jrbots = jr["STUPIDBOI69"]
 collection = jrbots["tokens"]
 
 def shorten_url(url):
     # SHORTNER KA API AND URL 
-    resp = requests.get(f'https://{shortener_site}/api?api={shortener_api}&url={url}').json()
+    resp = requests.get(f'{shortener_site}/api?api={shortener_api}&url={url}').json()
     if resp['status'] == 'success':
         SHORT_LINK = resp['shortenedUrl']
     return SHORT_LINK
@@ -93,7 +91,9 @@ def get_current_time():
 def get_readable_time(seconds):
     dt = datetime.fromtimestamp(int(seconds))
     return dt.strftime('%Y-%m-%d %H:%M:%S')
-#####
+
+
+
 
 class MergeBot(Client):
     def start(self):
