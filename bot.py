@@ -60,6 +60,7 @@ paid_promotion = Config.PAID_PROMOTION
 shortener_site = Config.SHORTENER_SITE
 shortener_api = Config.SHORTENER_API
 bot_username = Config.BOT_USERNAME
+TIMEOUT = int(Config.TIMEOUT)
 #
 
 #####
@@ -343,11 +344,11 @@ async def files_handler(c: Client, m: Message):
     uid = m.from_user.id
     user = UserSettings(user_id, m.from_user.first_name)
     
-    if Config.PAID_BOT.upper() == "YES":  # Access PAID_BOT through Config
+    if Config.PAID_BOT.upper() == "YES":
         result = collection.find_one({"user_id": uid})
         if result is None:
-            ad_code = str_to_b64(f"{uid}:{str(get_current_time() + int(Config.TIMEOUT))}")  # Use Config.TIMEOUT
-            ad_url = shorten_url(f"https://t.me/{Config.BOT_USERNAME}?start={ad_code}")  # Use Config.BOT_USERNAME
+            ad_code = str_to_b64(f"{uid}:{str(get_current_time() + int(TIMEOUT))}")  
+            ad_url = shorten_url(f"https://t.me/{Config.BOT_USERNAME}?start={ad_code}") 
             await c.send_message(
                 m.chat.id,
                 f"""<b>ℹ️ Hi {m.from_user.mention},
@@ -362,8 +363,8 @@ Your verification is expired, click on below button and complete the verificatio
             )
             return
         elif int(result["time_out"]) < get_current_time():
-            ad_code = str_to_b64(f"{uid}:{str(get_current_time() + int(Config.TIMEOUT))}")  # Use Config.TIMEOUT
-            ad_url = shorten_url(f"https://t.me/{Config.BOT_USERNAME}?start={ad_code}")  # Use Config.BOT_USERNAME
+            ad_code = str_to_b64(f"{uid}:{str(get_current_time() + int(TIMEOUT)))}") 
+            ad_url = shorten_url(f"https://t.me/{Config.BOT_USERNAME}?start={ad_code}") 
             await c.send_message(
                 m.chat.id,
                 f"""<b>ℹ️ Hi {m.from_user.mention},
@@ -378,7 +379,7 @@ Your verification is expired, click on below button and complete the verificatio
             )
             return
         elif int(result["time_out"]) < get_current_time():
-            ad_code = str_to_b64(f"{uid}:{str(get_current_time() + int(Config.TIMEOUT)}") # timeout
+            ad_code = str_to_b64(f"{uid}:{str(get_current_time() + int(TIMEOUT)}") # timeout
             ad_url = shorten_url(f"https://t.me/{bot_username}?start={ad_code}")
             await c.send_message(
                 m.chat.id,
@@ -393,6 +394,7 @@ Your verification is expired, click on below button and complete the verificatio
                 reply_to_message_id=m.id,
             )
             return
+		
 		
     if user.merge_mode == 4: # extract_mode
         return
