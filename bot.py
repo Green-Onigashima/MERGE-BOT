@@ -246,33 +246,32 @@ async def start_handler(c: Client, m: Message):
             ad_msg = b64_to_str(m.text.split("/start ")[1])
             if int(user_id) != int(ad_msg.split(":")[0]):
                 await c.send_message(
-                m.chat.id,
-                f"""<b>ℹ️ Hi {m.from_user.mention},
+                    m.chat.id,
+                    f"""<b>ℹ️ Hi {m.from_user.mention},
 Your verification is invalid, click on below button and complete the verification to get access.</b>""",
-                disable_web_page_preview=True,
-                reply_markup=InlineKeyboardMarkup(
-                    [[
-                        InlineKeyboardButton("↪️ Get free access for 24-hrs ↩️", url=ad_url)
-                    ]]
-                ),
-                reply_to_message_id=m.id,
-            )
-            return
+                    disable_web_page_preview=True,
+                    reply_markup=InlineKeyboardMarkup(
+                        [[
+                            InlineKeyboardButton("↪️ Get free access for 24-hrs ↩️", url=ad_url)
+                        ]]
+                    ),
+                    reply_to_message_id=m.id,
+                )
+                return
             if int(ad_msg.split(":")[1]) < get_current_time():
 		await c.send_message(
-                m.chat.id,
-                f"""<b>ℹ️ Hi {m.from_user.mention},
+                    m.chat.id,
+                    f"""<b>ℹ️ Hi {m.from_user.mention},
 Your verification is expired, click on below button and complete the verification to get access.</b>""",
-                disable_web_page_preview=True,
-                reply_markup=InlineKeyboardMarkup(
-                    [[
-                        InlineKeyboardButton("↪️ Get free access for 24-hrs ↩️", url=ad_url)
-                    ]]
-                ),
-                reply_to_message_id=m.id,
-            )
-            return
-
+                    disable_web_page_preview=True,
+                    reply_markup=InlineKeyboardMarkup(
+                        [[
+                            InlineKeyboardButton("↪️ Get free access for 24-hrs ↩️", url=ad_url)
+                        ]]
+                    ),
+                    reply_to_message_id=m.id,
+                )
+                return
 		
             if int(ad_msg.split(":")[1]) > int(get_current_time() + {timeout}):  
                 await c.send_message(
