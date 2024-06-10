@@ -60,6 +60,7 @@ paid_promotion = Config.PAID_PROMOTION
 shortener_site = Config.SHORTENER_SITE
 shortener_api = Config.SHORTENER_API
 bot_username = Config.BOT_USERNAME
+TIMEOUT= Config.TIMEOUT
 #
 
 #####
