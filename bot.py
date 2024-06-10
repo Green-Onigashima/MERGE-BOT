@@ -236,7 +236,6 @@ async def broadcast_handler(c: Client, m: Message):
 
 
 #####
-
 @mergeApp.on_message(filters.command(["start"]) & filters.private)
 async def start_handler(c: Client, m: Message):
     if m.text.startswith("/start ") and len(m.text) > 7:
@@ -246,51 +245,31 @@ async def start_handler(c: Client, m: Message):
             if int(user_id) != int(ad_msg.split(":")[0]):
                 await c.send_message(
                     m.chat.id,
-                    f"""<b>ℹ️ Hi {m.from_user.mention},
-Your verification is invalid, click on below button and complete the verification to get access.</b>""",
-                    disable_web_page_preview=True,
-                    reply_markup=InlineKeyboardMarkup(
-                        [[
-                            InlineKeyboardButton("↪️ Get free access for 24-hrs ↩️", url=ad_url)
-                        ]]
-                    ),
+                    f"<b>ℹ️ Hi {m.from_user.mention},\nYour verification is invalid, click on below button and complete the verification to get access.</b>",
                     reply_to_message_id=m.id,
                 )
                 return
-            
             if int(ad_msg.split(":")[1]) < get_current_time():
                 await c.send_message(
                     m.chat.id,
-                    f"""<b>ℹ️ Hi {m.from_user.mention},
-Your verification is invalid, click on below button and complete the verification to get access.</b>""",
-                    disable_web_page_preview=True,
-                    reply_markup=InlineKeyboardMarkup(
-                        [[
-                            InlineKeyboardButton("↪️ Get free access for 24-hrs ↩️", url=ad_url)
-                        ]]
-                    ),
+                    f"<b>ℹ️ Hi {m.from_user.mention},\nYour verification is invalid, click on below button and complete the verification to get access.</b>",
                     reply_to_message_id=m.id,
                 )
                 return
-            
-            if int(ad_msg.split(":")[1]) > int(get_current_time() + 86400): #Timeout
+            if int(ad_msg.split(":")[1]) > int(get_current_time() + 86400):  #Timeout
                 await c.send_message(
                     m.chat.id,
-                    "**Don't try to be over smart**",
+                    "**Dont try to be over smart**",
                     reply_to_message_id=m.id,
                 )
                 return
-            
             query = {"user_id": user_id}
             collection.update_one(
                 query, {"$set": {"time_out": int(ad_msg.split(":")[1])}}, upsert=True
             )
             await c.send_message(
                 m.chat.id,
-                f"""<b>Hurray 😁 {m.from_user.mention}!
-Now you are successfully verified to use this bot,
-
-Hit /help to find out more about how to use me to my full potential.</b>""",
+                f"<b>Hurray 😁 {m.from_user.mention}!\nNow you are successfully verified to use this bot,\n\nHit /help to find out more about how to use me to my full potential.</b>",
                 reply_to_message_id=m.id,
             )
             return
@@ -301,7 +280,7 @@ Hit /help to find out more about how to use me to my full potential.</b>""",
                 reply_to_message_id=m.id,
             )
             return
-
+		
     res = await m.reply_photo(
         Config.START_PIC,
         caption=f"""<b>ℹ️ Hi {m.from_user.first_name},
@@ -309,16 +288,16 @@ I'm merger and extractor bot,
 I can merge files, videos, audios, subtitles; in one video or file
 and I can also extract that too.
 
-Hit /help to learn, how to use this bot.""",
+Hit /help to learn, how to use this bot.</b>""",
         quote=True,
         reply_markup=InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton("Paid Promotion", url=f"https://t.me/{paid_promotion}")],
+                [InlineKeyboardButton("📢 Paid Promotion", url=f"https://t.me/{paid_promotion}")],
                 [
                     InlineKeyboardButton("⛅ More Bots", url="https://t.me/jr_bots"),
                     InlineKeyboardButton("🌨️ Developer", url=f"https://t.me/StupidBoi69"),
                 ],
-                [InlineKeyboardButton("Close", callback_data="close")],
+                [InlineKeyboardButton("📴 Close", callback_data="close")],
             ]
         ),
     )
@@ -347,7 +326,7 @@ async def files_handler(c: Client, m: Message):
         result = collection.find_one({"user_id": uid})
         if result is None:
             ad_code = str_to_b64(f"{uid}:{str(get_current_time() + 86400)}") #Timeout
-            ad_url = shorten_url(f"https://t.me/{Config.BOT_USERNAME}?start={ad_code}") 
+            ad_url = shorten_url(f"https://t.me/{bot_username}?start={ad_code}") 
             await c.send_message(
                 m.chat.id,
                 f"""<b>ℹ️ Hi {m.from_user.mention},
@@ -362,8 +341,8 @@ Your verification is expired, click on below button and complete the verificatio
             )
             return
         elif int(result["time_out"]) < get_current_time():
-            ad_code = str_to_b64(f"{uid}:{str(get_current_time() + 86400)}")
-            ad_url = shorten_url(f"https://t.me/{Config.BOT_USERNAME}?start={ad_code}") 
+            ad_code = str_to_b64(f"{uid}:{str(get_current_time() + 86400)}") #Timeout
+            ad_url = shorten_url(f"https://t.me/{bot_username}?start={ad_code}") 
             await c.send_message(
                 m.chat.id,
                 f"""<b>ℹ️ Hi {m.from_user.mention},
