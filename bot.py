@@ -281,9 +281,8 @@ async def start_handler(c: Client, m: Message):
             )
             return
 		
-    res = await m.reply_photo(
-        Config.START_PIC,
-        caption=f"""<b>ℹ️ Hi {m.from_user.first_name},
+    res = await m.reply_text(
+        text=f"""<b>ℹ️ Hi {m.from_user.first_name},
 I'm merger and extractor bot,
 I can merge files, videos, audios, subtitles; in one video or file
 and I can also extract that too.
