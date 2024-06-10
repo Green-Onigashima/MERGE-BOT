@@ -69,7 +69,7 @@ collection = jrbots["tokens"]
 
 def shorten_url(url):
     # SHORTNER KA API AND URL 
-    resp = requests.get(f"https://(Config.SHORTENER_SITE)/api?api=(Config.SHORTENER_API)&url={url}").json()
+    resp = requests.get(f'https://{Config.SHORTENER_SITE}/api?api={Config.SHORTENER_API}&url={url}').json()
     if resp['status'] == 'success':
         SHORT_LINK = resp['shortenedUrl']
     return SHORT_LINK
