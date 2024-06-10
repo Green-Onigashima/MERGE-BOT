@@ -337,9 +337,7 @@ Hit /help to find out more about how to use me to my full potential.</b>""",
 '''
 
 @mergeApp.on_message(
-    (filters.documenmergeApp.on_message(
-    (filters.document | filters.video | filters.audio) & filters.private
-)
+    (filters.document | filters.video | filters.audio) & filters.private)
 async def files_handler(c: Client, m: Message):
     user_id = m.from_user.id
     uid = m.from_user.id
