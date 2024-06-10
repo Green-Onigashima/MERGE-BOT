@@ -262,7 +262,7 @@ Your verification is invalid, click on below button and complete the verificatio
 		await c.send_message(
                     m.chat.id,
                     f"""<b>ℹ️ Hi {m.from_user.mention},
-Your verification is expired, click on below button and complete the verification to get access.</b>""",
+Your verification is invalid, click on below button and complete the verification to get access.</b>""",
                     disable_web_page_preview=True,
                     reply_markup=InlineKeyboardMarkup(
                         [[
