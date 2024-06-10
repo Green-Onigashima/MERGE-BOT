@@ -25,8 +25,7 @@
 			"description": "Username of the bot", "required": false
 		},
 		"DATABASE_URL": {
-			"description": "Create a mongo db", "required": false
-		
+			"description": "Create a mongo db", "required": false	
 		},
 		"USER_STRING_SESSION": {
 			"description": "Generate pyrogram string session", "required": false
