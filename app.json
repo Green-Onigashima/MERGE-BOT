@@ -1,3 +1,5 @@
+
+'''
 {
 	"name": "Telegram Video Merge Bot",
 	"description": "A Telegram Video Merge Bot in Pyrogram by @StupidBoi69",
@@ -49,3 +51,89 @@
 	}
 }
 
+'''
+
+
+
+
+{
+  "name": "F-SUBS 6 BUTTON",
+  "description": "BOT BY MS DZULQURNAIN",
+  "stack": "heroku-22",
+  "keywords": [
+    "telegram",
+    "file",
+    "sharing"
+  ],
+  "repository": "https://github.com/Green-Onigashima/MERGE-BOT",
+  "logo": "https://telegra.ph/file/e86b561ca93dbc98ea2f1.jpg",
+  "env": {
+    "BOT_TOKEN": {
+      "description": "Get from @BotFather",
+      "value": ""
+    },
+    "OWNER": {
+      "description": "Username of owner",
+      "value": "StupidBoi69"
+    },
+    "OWNER_ID": {
+      "description": "Userid of OWNER",
+      "value": "1895952308"
+    },
+    "BOT_USERNAME": {
+      "description": "Username of bot",
+      "value": ""
+    },
+    "API_ID": {
+      "description": "Get from my.telegram.org",
+      "value": "25695562"
+    },
+    "API_HASH": {
+      "description": "Get from my.telegram.org",
+      "value": "0b691c3e86603a7e34aae0b5927d725a"
+    },
+    "SHORTENER_SITE": {
+     "description": "Paste the url of shortener website",
+     "value": ""
+    },
+    "SHORTENER_API": {
+     "description": "Get API of shortener website",
+     "value": ""
+    },
+    "LOGCHANNEL": {
+      "description": "Log channel id",
+      "value": "-100"
+    },
+    "TIMEOUT": {
+      "description": "60*60*{hour}, and multiple",
+      "value": "86400"
+   }
+    "PAID_PROMOTIOM": {
+      "description": "Telegram chat username",
+      "value": ""
+    },
+    "USER_STRING_SESSION": {
+      "description": "Generate pyrogram string session",
+      "value": ""
+    }
+  },
+  "addons": [
+    {
+    "plan": "heroku-postgresql",
+      "options": {
+        "version": "13"
+      }
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  }
+}
