@@ -20,7 +20,7 @@ async def MergeVideo(input_file: str, user_id: int, message: Message, format_: s
     :param `format_`: Pass File Extension.
     :return: This will return Merged Video File Path
     """
-    output_vid = f"downloads/{str(user_id)}/[@Rokubotz].{format_.lower()}"
+    output_vid = f"downloads/{str(user_id)}/@jr_bots.{format_.lower()}" #[@Anime_Elixir]
     file_generator_command = [
         "ffmpeg",
         "-f",
@@ -44,11 +44,11 @@ async def MergeVideo(input_file: str, user_id: int, message: Message, format_: s
         )
     except NotImplementedError:
         await message.edit(
-            text="Unable to Execute FFmpeg Command! Got `NotImplementedError` ...\n\nPlease run bot in a Linux/Unix Environment."
+            text="**Unable to Execute FFmpeg Command! Got NotImplementedError ...\n\nPlease run bot in a Linux/Unix Environment.**"
         )
         await asyncio.sleep(10)
         return None
-    await message.edit("Merging Video Now ...\n\nPlease Keep Patience ...")
+    await message.edit("<b>Video is merging; please wait.</b>")
     stdout, stderr = await process.communicate()
     e_response = stderr.decode().strip()
     t_response = stdout.decode().strip()
@@ -95,7 +95,7 @@ async def MergeSub(filePath: str, subPath: str, user_id):
             subTrack += 1
     muxcmd.append(f"-metadata:s:s:{subTrack}")
     subTrack += 1
-    subTitle = f"Track {subTrack} - tg@Rokubotz"
+    subTitle = f"Track {subTrack} - (@jr_bots)"
     muxcmd.append(f"title={subTitle}")
     muxcmd.append("-c:v")
     muxcmd.append("copy")
@@ -103,11 +103,11 @@ async def MergeSub(filePath: str, subPath: str, user_id):
     muxcmd.append("copy")
     muxcmd.append("-c:s")
     muxcmd.append("copy")
-    muxcmd.append(f"./downloads/{str(user_id)}/[@Rokubotz]_softmuxed_video.mkv")
+    muxcmd.append(f"./downloads/{str(user_id)}/(@jr_bots) softmuxed video.mkv")
     LOGGER.info("Muxing subtitles")
     subprocess.call(muxcmd)
     orgFilePath = shutil.move(
-        f"downloads/{str(user_id)}/[@Rokubotz]_softmuxed_video.mkv", filePath
+        f"downloads/{str(user_id)}/(@jr_bots) softmuxed video.mkv", filePath
     )
     return orgFilePath
 
@@ -147,7 +147,7 @@ def MergeSubNew(filePath: str, subPath: str, user_id, file_list):
         muxcmd.append("-map")
         muxcmd.append(f"{j}:s")
         muxcmd.append(f"-metadata:s:s:{subTrack}")
-        muxcmd.append(f"title=Track {subTrack+1} - tg@Rokubotz")
+        muxcmd.append(f"title=Track {subTrack+1} - (@jr_bots)")
         subTrack += 1
     muxcmd.append("-c:v")
     muxcmd.append("copy")
@@ -155,10 +155,10 @@ def MergeSubNew(filePath: str, subPath: str, user_id, file_list):
     muxcmd.append("copy")
     muxcmd.append("-c:s")
     muxcmd.append("copy")
-    muxcmd.append(f"./downloads/{str(user_id)}/[@Rokubotz]_softmuxed_video.mkv")
+    muxcmd.append(f"./downloads/{str(user_id)}/(@jr_bots) softmuxed video.mkv")
     LOGGER.info("Sub muxing")
     subprocess.call(muxcmd)
-    return f"downloads/{str(user_id)}/[@Rokubotz]_softmuxed_video.mkv"
+    return f"downloads/{str(user_id)}/(@jr_bots) softmuxed video.mkv"
 
 
 def MergeAudio(videoPath: str, files_list: list, user_id):
@@ -187,7 +187,7 @@ def MergeAudio(videoPath: str, files_list: list, user_id):
         muxcmd.append("-map")
         muxcmd.append(f"{j}:a")
         muxcmd.append(f"-metadata:s:a:{audioTracks}")
-        muxcmd.append(f"title=Track {audioTracks+1} - tg@Rokubotz")
+        muxcmd.append(f"title=Track {audioTracks+1} - (@jr_bots)")
         audioTracks += 1
     muxcmd.append(f"-disposition:s:a:{fAudio}")
     muxcmd.append("default")
@@ -199,12 +199,12 @@ def MergeAudio(videoPath: str, files_list: list, user_id):
     muxcmd.append("copy")
     muxcmd.append("-c:s")
     muxcmd.append("copy")
-    muxcmd.append(f"downloads/{str(user_id)}/[@Rokubotz]_export.mkv")
+    muxcmd.append(f"downloads/{str(user_id)}/(@jr_bots) muxed video.mkv")
 
     LOGGER.info(muxcmd)
     process = subprocess.call(muxcmd)
     LOGGER.info(process)
-    return f"downloads/{str(user_id)}/[@Rokubotz]_export.mkv"
+    return f"downloads/{str(user_id)}/(@jr_bots) muxed.mkv"
 
 
 async def cult_small_video(video_file, output_directory, start_time, end_time, format_):
