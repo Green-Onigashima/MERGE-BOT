@@ -57,8 +57,8 @@ parent_id = Config.GDRIVE_FOLDER_ID
 
 #
 paid_promotion = Config.PAID_PROMOTION
-#shortener_site = Config.SHORTENER_SITE
-#shortener_api = Config.SHORTENER_API
+shortener_site = Config.SHORTENER_SITE
+shortener_api = Config.SHORTENER_API
 bot_username = Config.BOT_USERNAME
 #
 
@@ -69,7 +69,7 @@ collection = jrbots["tokens"]
 
 def shorten_url(url):
     # SHORTNER KA API AND URL 
-    resp = requests.get(f'https://{Config.SHORTENER_SITE}/api?api={Config.SHORTENER_API}&url={url}').json()
+    resp = requests.get(f'https://{shortener_site}/api?api={shortener_api}&url={url}').json()
     if resp['status'] == 'success':
         SHORT_LINK = resp['shortenedUrl']
     return SHORT_LINK
