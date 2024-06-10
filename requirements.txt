@@ -10,3 +10,4 @@ python-dotenv
 requests
 TgCrypto
 lxml_html_clean
+pytz
