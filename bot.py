@@ -380,58 +380,7 @@ Your verification is expired, click on below button and complete the verificatio
                 reply_to_message_id=m.id,
             )
             return
-#####
-
-'''
-@mergeApp.on_message(filters.command(["start"]) & filters.private)
-async def start_handler(c: Client, m: Message):
-    user = UserSettings(m.from_user.id, m.from_user.first_name)
-
-    if m.from_user.id != int(Config.OWNER):
-        if user.allowed is False:
-            res = await m.reply_text(
-                text=f"Hi **{m.from_user.first_name}**\n\n 🛡️ Unfortunately you can't use me\n\n𝖢𝗈𝗇𝗍𝖺𝖼𝗍 ➜ <a href=https://t.me/Snowball_Official>𝖮𝗐𝗇𝖾𝗋</a>",
-                quote=True,
-            )
-            return
-    else:
-        user.allowed = True
-        user.set()
-    res = await m.reply_photo(Config.START_PIC,
-        caption=f"Hi **{m.from_user.first_name}**\n\n ⚡ I am a file/video merger bot\n\n😎 I can merge Telegram files!, And upload it to telegram\n\n**Check /about for more.",
-	    quote=True,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [InlineKeyboardButton("🧑‍💻 𝖣𝖾𝗏𝖾𝗅𝗈𝗉𝖾𝗋", url="https://t.me/Snowball_Official")],
-                [
-                    InlineKeyboardButton(
-                        "⛅ 𝖴𝗉𝖽𝖺𝗍𝖾𝗌", url="https://t.me/Rokubotz"
-                    ),
-                    InlineKeyboardButton(
-                        "🌨️ 𝖲𝗎𝗉𝗉𝗈𝗋𝗍", url=f"https://t.me/Team_Roku"
-                    ),
-                ],
-                [InlineKeyboardButton("Close 🔐", callback_data="close")],
-            ]
-        ),
-    )
-
-@mergeApp.on_message(
-    (filters.document | filters.video | filters.audio) & filters.private
-)
-async def files_handler(c: Client, m: Message):
-    user_id = m.from_user.id
-    user = UserSettings(user_id, m.from_user.first_name)
-    if user_id != int(Config.OWNER):
-        if user.allowed is False:
-            res = await m.reply_text(
-                text=f"Hi **{m.from_user.first_name}**\n\n 🛡️ Unfortunately you can't use me\n\n**𝖢𝗈𝗇𝗍𝖺𝖼𝗍 ➜ <a href=https://t.me/Snowball_Official>𝖮𝗐𝗇𝖾𝗋</a>** ",
-                quote=True,
-            )
-            return
-
-'''
-     
+		
     if user.merge_mode == 4: # extract_mode
         return
     input_ = f"downloads/{str(user_id)}/input.txt"
