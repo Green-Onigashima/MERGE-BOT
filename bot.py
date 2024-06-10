@@ -60,7 +60,6 @@ paid_promotion = Config.PAID_PROMOTION
 shortener_site = Config.SHORTENER_SITE
 shortener_api = Config.SHORTENER_API
 bot_username = Config.BOT_USERNAME
-TIMEOUT= Config.TIMEOUT
 #
 
 #####
@@ -274,7 +273,7 @@ Your verification is invalid, click on below button and complete the verificatio
                 )
                 return
             
-            if int(ad_msg.split(":")[1]) > int(get_current_time() + TIMEOUT):
+            if int(ad_msg.split(":")[1]) > int(get_current_time() + int(Config.TIMEOUT)):
                 await c.send_message(
                     m.chat.id,
                     "**Don't try to be over smart**",
@@ -337,21 +336,36 @@ Hit /help to find out more about how to use me to my full potential.</b>""",
     )
 '''
 
-PAID_BOT = "YES"
-
 @mergeApp.on_message(
+    (filters.documenmergeApp.on_message(
     (filters.document | filters.video | filters.audio) & filters.private
 )
 async def files_handler(c: Client, m: Message):
     user_id = m.from_user.id
     uid = m.from_user.id
     user = UserSettings(user_id, m.from_user.first_name)
-	
-    if PAID_BOT.upper() == "YES":
+    
+    if Config.PAID_BOT.upper() == "YES":  # Access PAID_BOT through Config
         result = collection.find_one({"user_id": uid})
         if result is None:
-            ad_code = str_to_b64(f"{uid}:{str(get_current_time() + TIMEOUT)}") # timeout
-            ad_url = shorten_url(f"https://telegram.me/{bot_username}?start={ad_code}")
+            ad_code = str_to_b64(f"{uid}:{str(get_current_time() + int(Config.TIMEOUT))}")  # Use Config.TIMEOUT
+            ad_url = shorten_url(f"https://telegram.me/{Config.BOT_USERNAME}?start={ad_code}")  # Use Config.BOT_USERNAME
+            await c.send_message(
+                m.chat.id,
+                f"""<b>ℹ️ Hi {m.from_user.mention},
+Your verification is expired, click on below button and complete the verification to get access.</b>""",
+                disable_web_page_preview=True,
+                reply_markup=InlineKeyboardMarkup(
+                    [[
+                        InlineKeyboardButton("↪️ Get free access for 24-hrs ↩️", url=ad_url)
+                    ]]
+                ),
+                reply_to_message_id=m.id,
+            )
+            return
+        elif int(result["time_out"]) < get_current_time():
+            ad_code = str_to_b64(f"{uid}:{str(get_current_time() + int(Config.TIMEOUT))}")  # Use Config.TIMEOUT
+            ad_url = shorten_url(f"https://telegram.me/{Config.BOT_USERNAME}?start={ad_code}")  # Use Config.BOT_USERNAME
             await c.send_message(
                 m.chat.id,
                 f"""<b>ℹ️ Hi {m.from_user.mention},
