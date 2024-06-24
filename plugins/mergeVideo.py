@@ -63,7 +63,7 @@ chat_id=cb.from_user.id, message_ids=list_message_ids ):
             n+=1
             if gDict[cb.message.chat.id] and cb.message.id in gDict[cb.message.chat.id]:
                 return
-            await cb.message.edit(f**<u>DownLoading :</u> ⤵️\n{media.file_name}**)
+            await cb.message.edit(f"**<u>DownLoading :</u> ⤵️\n{media.file_name}**")
             LOGGER.info(f"DownLoading:\n media.file_name}")
             await asyncio.sleep(5)
         except UnknownError as e:
