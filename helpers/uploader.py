@@ -8,6 +8,7 @@ from config import Config
 from pyrogram import Client
 from pyrogram.types import CallbackQuery, Message, InlineKeyboardMarkup, InlineKeyboardButton
 
+from plugins.cb_handler import user_info_handler
 from helpers.display_progress import Progress
 
 
@@ -66,8 +67,8 @@ async def uploadVideo(
                         [
                             [
                                 InlineKeyboardButton(
-                                    text="Merged For",
-                                    url=f"tg://user?id={cb.from_user.id}"
+                                    text="User Info",
+                                    callback_data="user_info"
                                 )
                             ]
                         ]
@@ -120,8 +121,8 @@ async def uploadVideo(
                         [
                             [
                                 InlineKeyboardButton(
-                                    text="Merged For",
-                                    url=f"tg://user?id={cb.from_user.id}"
+                                    text="User Info",
+                                    callback_data="user_info"
                                 )
                             ]
                         ]
@@ -161,8 +162,8 @@ async def uploadFiles(
                         [
                             [
                                 InlineKeyboardButton(
-                                    text="Extracted For",
-                                    url=f"tg://user?id={cb.from_user.id}"
+                                    text="User Info",
+                                    callback_data="user_info"
                                 )
                             ]
                         ]
