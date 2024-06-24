@@ -420,3 +420,25 @@ async def callback_handler(c: Client, cb: CallbackQuery):
                 await streamsExtractor(c, cb, media_mid, exAudios=True, exSubs=True, exVideos=True)
         except Exception as e:
             LOGGER.error(e)
+
+
+@app.on_callback_query()
+async def callback_handler(c: Client, cb: CallbackQuery):
+    if cb.data == "user_info":
+        await user_info_handler(c, cb)
+
+async def user_info_handler(c: Client, cb: CallbackQuery):
+    user = cb.from_user
+    user_info = (
+        f"**User Information:**\n"
+        f"ID: {user.id}\n"
+        f"Username: @{user.username}\n"
+        f"First Name: {user.first_name}\n"
+        f"Last Name: {user.last_name if user.last_name else 'N/A'}\n"
+        f"Language: {user.language_code}\n"
+    )
+    
+    await cb.message.reply_text(
+        text=user_info
+    )
+
