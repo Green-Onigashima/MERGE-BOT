@@ -43,8 +43,8 @@ async def mergeNow(c: Client, cb: CallbackQuery, new_file_name: str):
 
     for i in await c.get_messages(chat_id=cb.from_user.id, message_ids=list_message_ids):
         media = i.video or i.document
-        await cb.message.edit_text(f"**<u>Downloading:</u>⤵️\n{media.file_name}**")
-        LOGGER.info(f"Downloading: {media.file_name}")
+        await cb.message.edit_text(f"**<u>DownLoading :</u> ⤵️\n{media.file_name}**")
+        LOGGER.info(f"DownLoading: {media.file_name}")
         await asyncio.sleep(5)
         
         file_dl_path = None
@@ -57,12 +57,12 @@ async def mergeNow(c: Client, cb: CallbackQuery, new_file_name: str):
                 message=media,
                 file_name=f"downloads/{str(cb.from_user.id)}/{str(i.id)}/vid.mkv",
                 progress=prog.progress_for_pyrogram,
-                progress_args=(f"**<u>Downloading:</u>⤵️\n{media.file_name}**", c_time, f"\n**🔽 Downloading: {n}/{all_videos}**"),
+                progress_args=(f"**<u>DownLoading :</u> ⤵️\n{media.file_name}**", c_time, f"\n**🔽 Downloading: {n}/{all_videos}**"),
             )
             n += 1
             if gDict.get(cb.message.chat.id) and cb.message.id in gDict[cb.message.chat.id]:
                 return
-            await cb.message.edit_text(f"**<u>Downloading:</u>⤵️\n{media.file_name}**")
+            await cb.message.edit_text(f"**<u>DownLoading :</u> ⤵️\n{media.file_name}**")
             LOGGER.info(f"Downloading: {media.file_name}")
             await asyncio.sleep(5)
         except UnknownError as e:
@@ -92,7 +92,7 @@ async def mergeNow(c: Client, cb: CallbackQuery, new_file_name: str):
             await delete_all(root=f"downloads/{str(cb.from_user.id)}")
             queueDB.update({cb.from_user.id: {"videos": [], "subtitles": [], "audios": []}})
             formatDB.update({cb.from_user.id: None})
-            await cb.message.edit_text("**Video is corrupted; Try to add thumbnail first.**")
+            await cb.message.edit_text("**🔴 Video is corrupted; Try to add thumbnail first.**")
             return
 
     _cache = list(set(vid_list))
@@ -121,7 +121,7 @@ async def mergeNow(c: Client, cb: CallbackQuery, new_file_name: str):
     await asyncio.sleep(3)
     file_size = os.path.getsize(merged_video_path)
     os.rename(merged_video_path, new_file_name)
-    await cb.message.edit_text(f"**<u>Renaming:</u>\n**{new_file_name.rsplit('/', 1)[-1]}**")
+    await cb.message.edit_text(f"**<u>✍️ Renaming :</u>\n**{new_file_name.rsplit('/', 1)[-1]}**")
     await asyncio.sleep(3)
     merged_video_path = new_file_name
     
